@@ -2,6 +2,7 @@ import streamlit as st
 import os
 from groq import Groq
 import random
+from crewai import Agent, Task, Crew, Process
 
 # from crewai import Agent, Task, Crew
 
