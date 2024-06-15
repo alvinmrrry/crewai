@@ -20,9 +20,9 @@ groq_api_key = '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'
 groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-8b-8192")
 # TAVILY_API_KEY = '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'
 @tool('DuckDuckGoSearch')
-def search(search_query: str):
+def search(search_query: str, q: str, query: str):
     """Search the web for informations """
-    return DuckDuckGoSearchResults().run(search_query)
+    return DuckDuckGoSearchResults().run(search_query, q, query)
 
 # Define your agents with roles and goals
 researcher = Agent(
