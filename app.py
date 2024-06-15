@@ -49,7 +49,7 @@ writer = Agent(
 
 # Create tasks for your agents
 task1 = Task(
-  description="""Conduct a comprehensive analysis of the latest advancements in AI in 2024.
+  description="""Conduct a comprehensive analysis of the latest advancements in AI in 2023.
   Identify key trends, breakthrough technologies, and potential industry impacts.""",
   expected_output="Full analysis report in bullet points",
   agent=researcher
