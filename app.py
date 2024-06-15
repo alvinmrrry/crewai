@@ -1,6 +1,7 @@
 import streamlit as st
 import os
-from groq import Groq
+# from groq import Groq
+from langchain_groq import ChatGroq
 import random
 from crewai import Agent, Task, Crew, Process
 
