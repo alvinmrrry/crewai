@@ -58,9 +58,9 @@ task1 = Task(
 task2 = Task(
   description="""Using the insights provided, develop an engaging blog
   post that highlights the most significant AI advancements.
-  Your post should be informative yet accessible, catering to a tech-savvy audience.
+  Your post should be informative yet accessible, catering to a tech-savvy audience and generate impressive insights.
   Make it sound cool, avoid complex words so it doesn't sound like AI.""",
-  expected_output="Full blog post of at least 100 paragraphs combined with figures, facts, cases",
+  expected_output="Full blog post of at least 10 paragraphs",
   agent=writer
 )
 
