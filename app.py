@@ -57,7 +57,7 @@ crew = Crew(
 )
 
 # Get your crew to work!
-result = crew.kickoff()
+result = crew.kickoff(company_name = 'Tesla')
 
 st.write("Chatbot:", result)
 
