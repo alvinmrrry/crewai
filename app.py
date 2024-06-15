@@ -44,7 +44,8 @@ writer = Agent(
   You transform complex concepts into compelling narratives.The main methodology is brainstorm which can give you more ideas and insights about topics you are working on. """,
   verbose=True,
   llm=groq_llm,
-  allow_delegation=True
+  allow_delegation=True,
+  tools=[search]
 )
 
 # Create tasks for your agents
