@@ -145,7 +145,7 @@ regex==2023.12.25
 requests==2.32.3
 requests-oauthlib==2.0.0
 rich==13.7.1
-rpd-py==0.18.1
+rpds-py==0.18.1
 rsa==4.9
 s3transfer==0.10.1
 safetensors==0.4.3
