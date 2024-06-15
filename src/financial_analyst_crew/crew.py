@@ -52,13 +52,3 @@ class FinancialAnalystCrew(Crew):
            process = Process.sequential,
            verbose = 2
         )
-    
-def main():
-    """Main function"""
-    inputs = {
-        'company_name': 'Tesla',
-    }
-    FinancialAnalystCrew().crew().kickoff(inputs=inputs)
-
-if __name__ == '__main__':
-    main()
