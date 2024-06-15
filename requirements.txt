@@ -1,7 +1,6 @@
 
 langchain == "^0.1.10"
 openai == "^1.13.3"
-crewai-tools == { version = "^0.2.6", optional = true }
 python-dotenv == "^1.0.0"
 
 
