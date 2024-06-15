@@ -1,7 +1,6 @@
 import streamlit as st
 import os
-# from groq import Groq
-from langchain_groq import ChatGroq
+from groq import Groq
 import random
 from crewai import Agent, Task, Crew, Process
 
@@ -17,7 +16,7 @@ from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 
 groq_api_key = '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'
-groq_llm = ChatGroq(groq_api_key=groq_api_key, temperature=0.0, model_name="llama3-8b-8192")
+groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-8b-8192")
 
 # Define your agents with roles and goals
 researcher = Agent(
