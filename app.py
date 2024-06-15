@@ -68,8 +68,7 @@ crew = Crew(
 # Get your crew to work!
 result = crew.kickoff()
 
-print("######################")
-print(result)
+st.write("Chatbot:", result)
 
 # def main():
 #     """
