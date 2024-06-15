@@ -60,7 +60,7 @@ task2 = Task(
   post that highlights the most significant AI advancements.
   Your post should be informative yet accessible, catering to a tech-savvy audience.
   Make it sound cool, avoid complex words so it doesn't sound like AI.""",
-  expected_output="Full blog post of at least 10 paragraphs combined with figures, facts, cases",
+  expected_output="Full blog post of at least 100 paragraphs combined with figures, facts, cases",
   agent=writer
 )
 
