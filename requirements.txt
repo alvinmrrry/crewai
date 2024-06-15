@@ -150,7 +150,6 @@ rsa==4.9
 s3transfer==0.10.1
 safetensors==0.4.3
 schema==0.7.7
-setuptools==69.5.1
 setuptools==70.0.0
 shapely==2.0.4
 six==1.16.0
