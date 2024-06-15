@@ -14,13 +14,13 @@ from langchain_core.messages import SystemMessage
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
-import langchain_community.tools.tavily_search.tool as tool
+import langchain_community.tools as tool
 
 
 groq_api_key = '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'
 groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-8b-8192")
 TAVILY_API_KEY = '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'
-search_tool = tool.TavilySearchResults()
+search_tool = tool.tavily_search.tool.TavilySearchResults()
 
 # Define your agents with roles and goals
 researcher = Agent(
