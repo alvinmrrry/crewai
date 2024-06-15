@@ -1,7 +1,4 @@
 import streamlit as st
-import os
-from groq import Groq
-import random
 from crewai import Agent, Task, Crew, Process
 
 from langchain.chains import ConversationChain, LLMChain
@@ -16,12 +13,16 @@ from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 # from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_community.tools import DuckDuckGoSearchResults
-
+from langchain.agents import tool
+from langchain.agents import load_tools
 
 groq_api_key = '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'
 groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-8b-8192")
 # TAVILY_API_KEY = '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'
-search_tool = DuckDuckGoSearchResults(name = 'search')
+@tool('DuckDuckGoSearch')
+def search(search_query: str):
+    """Search the web for informations """
+    return DuckDuckGoSearchResults().run(search_query)
 
 # Define your agents with roles and goals
 researcher = Agent(
@@ -34,7 +35,7 @@ researcher = Agent(
   allow_delegation=False,
   # You can pass an optional llm attribute specifying what model you wanna use.
   llm=groq_llm,
-  tools=[search_tool]
+  tools=[search]
 )
 writer = Agent(
   role='Tech Content Strategist',
