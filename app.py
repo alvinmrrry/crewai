@@ -36,14 +36,14 @@ writer = Agent(
 
 # Create tasks for your agents
 task1 = Task(
-  description="""Use a search tool to look up this company's stock information:{company_name}.
+  description="""Use a search tool to look up this company's stock information:Tesla.
     The goal is to prepare enough information to make an informed analysis of the company's stock performance.""",
   expected_output="All of the relevant financial information about the company's stock performance. ",
   agent=researcher
 )
 
 task2 = Task(
-  description="""Take {company_name}'s financial information and analyze it to make an informed analysis of the company's stock performance.
+  description="""Take Tesla financial information and analyze it to make an informed analysis of the company's stock performance.
     The goal is to prepare a report that includes a summary of the company's financial performance and a recommendation for whether to buy, hold, or sell the company's stock.""",
   expected_output="A report that includes a summary of the company's financial performance and a recommendation for whether to buy, hold, or sell the company's stock. ",
   agent=writer
@@ -57,7 +57,7 @@ crew = Crew(
 )
 
 # Get your crew to work!
-result = crew.kickoff(company_name = 'Tesla')
+result = crew.kickoff()
 
 st.write("Chatbot:", result)
 
