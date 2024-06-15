@@ -1,24 +1,13 @@
 import streamlit as st
-from crewai import Agent, Task, Crew, Process
-
+from crewai import Agent, Task, Crew
 from langchain.chains import ConversationChain, LLMChain
-from langchain_core.prompts import (
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-    MessagesPlaceholder,
-)
-from langchain_core.messages import SystemMessage
-from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain_groq import ChatGroq
-from langchain.prompts import PromptTemplate
-# from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_community.tools import DuckDuckGoSearchResults
 from langchain.agents import tool
-from langchain.agents import load_tools
 
 groq_api_key = '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'
 groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-70b-8192")
-# TAVILY_API_KEY = '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'
+
 @tool('DuckDuckGoSearch')
 def search(search_query: str, q: str, query: str):
     """Search the web for informations """
@@ -26,11 +15,9 @@ def search(search_query: str, q: str, query: str):
 
 # Define your agents with roles and goals
 researcher = Agent(
-  role='Senior Research Analyst',
-  goal='Uncover cutting-edge developments in AI and data science',
-  backstory="""You work at a leading tech think tank.
-  Your expertise lies in identifying emerging trends.
-  You have a knack for dissecting complex data and presenting actionable insights. you only export the questions in a list without label""",
+  role='Financial Researcher',
+  goal='Gather all of the necessary information, using search tools, about a company for the financial analyst to prepare a report.',
+  backstory="""An expert financial researcher, who spends all day and night thinking about finanacial performance of different companies.""",
   verbose=True,
   allow_delegation=False,
   # You can pass an optional llm attribute specifying what model you wanna use.
@@ -38,10 +25,9 @@ researcher = Agent(
   tools=[search]
 )
 writer = Agent(
-  role='Tech Content Strategist',
-  goal='Craft compelling content on tech advancements',
-  backstory="""You are a renowned Content Strategist, known for your insightful and engaging articles.
-  You transform complex concepts into compelling narratives.The main methodology is brainstorm which can give you more ideas and insights about topics you are working on. """,
+  role='Financial Analyst',
+  goal='Take provided company financial information and create a thorough financial report about a given company.',
+  backstory=""" An expert financial analyst who prides themselves on creating clear and easily readable financial reports of different companies. """,
   verbose=True,
   llm=groq_llm,
   allow_delegation=True,
@@ -50,18 +36,16 @@ writer = Agent(
 
 # Create tasks for your agents
 task1 = Task(
-  description="""Conduct a comprehensive analysis of the latest advancements in AI in 2023.
-  Identify key trends, breakthrough technologies, and potential industry impacts.""",
-  expected_output="Full analysis report in bullet points combined with figures, facts, cases",
+  description="""Use a search tool to look up this company's stock information:{company_name}.
+    The goal is to prepare enough information to make an informed analysis of the company's stock performance.""",
+  expected_output="All of the relevant financial information about the company's stock performance. ",
   agent=researcher
 )
 
 task2 = Task(
-  description="""Using the insights provided, develop an engaging blog
-  post that highlights the most significant AI advancements.
-  Your post should be informative yet accessible, catering to a tech-savvy audience and generate impressive insights.
-  Make it sound cool, avoid complex words so it doesn't sound like AI.""",
-  expected_output="Full blog post of at least 10 paragraphs, include: Abstract, Key Trends, Industry Impacts, Breakthrough Technologies, Cases, etc.",
+  description="""Take {company_name}'s financial information and analyze it to make an informed analysis of the company's stock performance.
+    The goal is to prepare a report that includes a summary of the company's financial performance and a recommendation for whether to buy, hold, or sell the company's stock.""",
+  expected_output="A report that includes a summary of the company's financial performance and a recommendation for whether to buy, hold, or sell the company's stock. ",
   agent=writer
 )
 
