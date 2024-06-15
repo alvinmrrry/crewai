@@ -1,5 +1,5 @@
-from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task
+from crewai.project import CrewBase
+from crewai import Agent, Task, Crew, Process
 from langchain_groq import ChatGroq
 
 @CrewBase
