@@ -135,7 +135,7 @@ pygments==2.18.0
 pypdf==4.2.0
 pypika==0.48.9
 pyproject-hooks==1.1.0
-pysbe==0.3.4
+pysbd==0.3.4
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.1
