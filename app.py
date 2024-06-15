@@ -17,7 +17,7 @@ from langchain.agents import tool
 from langchain.agents import load_tools
 
 groq_api_key = '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'
-groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-8b-8192")
+groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-70b-8192")
 # TAVILY_API_KEY = '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'
 @tool('DuckDuckGoSearch')
 def search(search_query: str, q: str, query: str):
