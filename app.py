@@ -15,7 +15,7 @@ from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 # from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain_community.tools.ddg_search.tool import DuckDuckGoSearchRun
+from langchain_community.tools import DuckDuckGoSearchRun
 
 
 groq_api_key = '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'
