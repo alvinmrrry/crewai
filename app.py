@@ -33,7 +33,7 @@ researcher = Agent(
     goal='Provide up-to-date market analysis of the Obsidian and obsidian plugins',
     backstory='An expert analyst with a keen eye for methodology of learning.',
     llm = groq_llm,
-    tools=[search],
+    tools=[search_tool],
     verbose=True
 )
 
