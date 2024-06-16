@@ -1,5 +1,5 @@
 import streamlit as st
-from crewai import Agent, Task, Crew
+from crewai import Agent, Task, Crew, Process
 from langchain.chains import ConversationChain, LLMChain
 from langchain_groq import ChatGroq
 from langchain_community.tools import DuckDuckGoSearchResults
@@ -64,7 +64,9 @@ write = Task(
 crew = Crew(
     agents=[researcher, writer],
     tasks=[research, write],
-    verbose=2
+    verbose=2,
+    process=Process.hierarchical,
+    manager_llm=groq_llm
 )
 
 # Get your crew to work!
