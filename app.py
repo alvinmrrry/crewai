@@ -25,7 +25,7 @@ search_tool = SerperDevTool()
 @tool('DuckDuckGoSearch')
 def search(query):
     """Search the web for informations """
-    return DuckDuckGoSearchResults().run(query)
+    return DuckDuckGoSearchResults(num_results=10).run(query)
 
 # Create agents
 researcher = Agent(
@@ -33,7 +33,7 @@ researcher = Agent(
     goal='Provide up-to-date market analysis of the Obsidian and obsidian plugins',
     backstory='An expert analyst with a keen eye for methodology of learning.',
     llm = groq_llm,
-    tools=[search_tool],
+    tools=[search],
     verbose=True
 )
 
