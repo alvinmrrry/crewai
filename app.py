@@ -5,55 +5,65 @@ from langchain_groq import ChatGroq
 from langchain_community.tools import DuckDuckGoSearchResults
 from langchain.agents import tool
 
+from crewai_tools import(
+    DirectoryReadTool,
+    FileReadTool,
+    SerperDevTool,
+    WebsiteSearchTool
+)
+
+SERPER_API_KEY = '2203d27aa32a1d92275134fb632bf009714b2476'
 groq_api_key = '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'
 groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-70b-8192", temperature=0)
+
+# Instantiate tools
+docs_tool = DirectoryReadTool(directory='src/financial_analyst_crew')
+file_tool = FileReadTool()
+search_tool = SerperDevTool()
+web_rag_tool = WebsiteSearchTool()
 
 @tool('DuckDuckGoSearch')
 def search(query):
     """Search the web for informations """
     return DuckDuckGoSearchResults().run(query)
-
-# Define your agents with roles and goals
+# Create agents
 researcher = Agent(
-  role='Financial Researcher',
-  goal='Gather all of the necessary information, using search tools, about a company for the financial analyst to prepare a report.',
-  backstory="""An expert financial researcher, who spends all day and night thinking about finanacial performance of different companies.""",
-  verbose=True,
-  allow_delegation=False,
-  # You can pass an optional llm attribute specifying what model you wanna use.
-  llm=groq_llm,
-  tools=[search]
+    role='Market Research Analyst',
+    goal='Provide up-to-date market analysis of the AI industry',
+    backstory='An expert analyst with a keen eye for market trends.',
+    tools=[search_tool, web_rag_tool],
+    llm = groq_llm,
+    verbose=True
 )
+
 writer = Agent(
-  role='Financial Analyst',
-  goal='Take provided company financial information and create a thorough financial report about a given company.',
-  backstory=""" An expert financial analyst who prides themselves on creating clear and easily readable financial reports of different companies. """,
-  verbose=True,
-  llm=groq_llm,
-  allow_delegation=True,
-  tools=[search]
+    role='Content Writer',
+    goal='Craft engaging blog posts about the AI industry',
+    backstory='A skilled writer with a passion for technology.',
+    tools=[docs_tool, file_tool],
+    verbose=True,
+    llm = groq_llm
 )
 
-# Create tasks for your agents
-task1 = Task(
-  description="""Use a search tool to look up this company's stock information:Tesla.
-    The goal is to prepare enough information to make an informed analysis of the company's stock performance.""",
-  expected_output="All of the relevant financial information about the company's stock performance. ",
-  agent=researcher
+# Define tasks
+research = Task(
+    description='Research the latest trends in the AI industry and provide a summary.',
+    expected_output='A summary of the top 3 trending developments in the AI industry with a unique perspective on their significance.',
+    agent=researcher
 )
 
-task2 = Task(
-  description="""Take Tesla financial information and analyze it to make an informed analysis of the company's stock performance.
-    The goal is to prepare a report that includes a summary of the company's financial performance and a recommendation for whether to buy, hold, or sell the company's stock.""",
-  expected_output="A report that includes a summary of the company's financial performance and a recommendation for whether to buy, hold, or sell the company's stock. ",
-  agent=writer
+write = Task(
+    description='Write an engaging blog post about the AI industry, based on the research analyst’s summary. Draw inspiration from the latest blog posts in the directory.',
+    expected_output='A 4-paragraph blog post formatted in markdown with engaging, informative, and accessible content, avoiding complex jargon.',
+    agent=writer,
+    output_file='blog-posts/new_post.md'  # The final blog post will be saved here
 )
 
-# Instantiate your crew with a sequential process
+# Assemble a crew
 crew = Crew(
-  agents=[researcher, writer],
-  tasks=[task1, task2],
-  verbose=2, # You can set it to 1 or 2 to different logging levels
+    agents=[researcher, writer],
+    tasks=[research, write],
+    verbose=2
 )
 
 # Get your crew to work!
