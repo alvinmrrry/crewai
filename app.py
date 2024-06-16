@@ -25,7 +25,7 @@ search_tool = SerperDevTool()
 @tool('DuckDuckGoSearch')
 def search(query):
     """Search the web for informations """
-    return DuckDuckGoSearchResults(num_results=10).run(query)
+    return DuckDuckGoSearchResults(num_results=3).run(query)
 
 # Create agents
 researcher = Agent(
