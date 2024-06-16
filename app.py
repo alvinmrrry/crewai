@@ -20,7 +20,7 @@ groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-70b-8192", tem
 docs_tool = DirectoryReadTool(directory='src/financial_analyst_crew')
 file_tool = FileReadTool()
 search_tool = SerperDevTool()
-web_rag_tool = WebsiteSearchTool()
+# web_rag_tool = WebsiteSearchTool()
 
 @tool('DuckDuckGoSearch')
 def search(query):
@@ -33,7 +33,7 @@ researcher = Agent(
     goal='Provide up-to-date market analysis of the AI industry',
     backstory='An expert analyst with a keen eye for market trends.',
     llm = groq_llm,
-    tools=[search_tool, web_rag_tool],
+    tools=[search_tool],
     verbose=True
 )
 
