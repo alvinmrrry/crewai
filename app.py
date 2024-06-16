@@ -9,7 +9,7 @@ groq_api_key = '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'
 groq_llm = ChatGroq(groq_api_key=groq_api_key, model_name="llama3-70b-8192")
 
 @tool('DuckDuckGoSearch')
-def search(*args):
+def search():
     """Search the web for informations """
     return DuckDuckGoSearchResults().run()
 
