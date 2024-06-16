@@ -42,7 +42,7 @@ writer = Agent(
     goal='Craft engaging blog posts about the learning',
     backstory='A skilled writer with a passion for technology.',
     llm = groq_llm,
-    tools=[docs_tool, file_tool],
+    tools=[docs_tool],
     verbose=True
 )
 
