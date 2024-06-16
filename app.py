@@ -29,7 +29,7 @@ def search(query):
 
 # Create agents
 researcher = Agent(
-    role='Market Research Analyst',
+    role='Knowledge management and learning process optimization',
     goal='Provide up-to-date market analysis of the Obsidian and obsidian plugins',
     backstory='An expert analyst with a keen eye for methodology of learning.',
     llm = groq_llm,
