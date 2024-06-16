@@ -30,8 +30,8 @@ def search(query):
 # Create agents
 researcher = Agent(
     role='Market Research Analyst',
-    goal='Provide up-to-date market analysis of the AI industry',
-    backstory='An expert analyst with a keen eye for market trends.',
+    goal='Provide up-to-date market analysis of the Obsidian and obsidian plugins',
+    backstory='An expert analyst with a keen eye for methodology of learning.',
     llm = groq_llm,
     tools=[search_tool],
     verbose=True
@@ -39,7 +39,7 @@ researcher = Agent(
 
 writer = Agent(
     role='Content Writer',
-    goal='Craft engaging blog posts about the AI industry',
+    goal='Craft engaging blog posts about the learning',
     backstory='A skilled writer with a passion for technology.',
     llm = groq_llm,
     tools=[docs_tool, file_tool],
@@ -48,13 +48,13 @@ writer = Agent(
 
 # Define tasks
 research = Task(
-    description='Research the latest trends in the AI industry and provide a summary.',
-    expected_output='A summary of the top 3 trending developments in the AI industry with a unique perspective on their significance.',
+    description='Research the latest trends in the learning skills and provide a summary.',
+    expected_output='A summary of the top 5 methods with a unique perspective on their significance.',
     agent=researcher
 )
 
 write = Task(
-    description='Write an engaging blog post about the AI industry, based on the research analyst’s summary. Draw inspiration from the latest blog posts in the directory.',
+    description='Write an engaging blog post about the learning skills, based on the research analyst’s summary. Draw inspiration from the latest blog posts in the directory.',
     expected_output='A 4-paragraph blog post formatted in markdown with engaging, informative, and accessible content, avoiding complex jargon.',
     agent=writer,
     output_file='blog-posts/new_post.md'  # The final blog post will be saved here
